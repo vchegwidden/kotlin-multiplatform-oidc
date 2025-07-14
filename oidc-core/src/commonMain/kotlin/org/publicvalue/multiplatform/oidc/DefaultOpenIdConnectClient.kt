@@ -252,7 +252,7 @@ class DefaultOpenIdConnectClient(
         }
     }
 
-    private suspend fun HttpResponse.toOpenIdConnectException(cause: Throwable): OpenIdConnectException.UnsuccessfulTokenRequest {
+    private suspend fun HttpResponse.toOpenIdConnectException(cause: Throwable? = null): OpenIdConnectException.UnsuccessfulTokenRequest {
         val errorResponse = call.errorBody()
         val body = call.body<String>().decodeURLQueryComponent(plusIsSpace = true)
         return OpenIdConnectException.UnsuccessfulTokenRequest(
